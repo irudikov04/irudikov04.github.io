@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Приглашение для Сарочки ❤️</title>
+    <style>
+        /* ─── Reset & Base ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #1a0b0b 0%, #2d1418 40%, #3d1a22 100%);
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ─── Фоновые сердца (партиклы) ─── */
+        .bg-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 120, 150, 0.15);
+            font-size: 24px;
+            animation: floatHeart 18s linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.6);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(720deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* ─── Основная карточка ─── */
+        .card {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 248, 245, 0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 40px 32px 48px;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 200, 200, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 180, 180, 0.3);
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        /* ─── Декоративные уголки ─── */
+        .card::before,
+        .card::after {
+            content: '✦';
+            position: absolute;
+            font-size: 28px;
+            color: #e0697a;
+            opacity: 0.5;
+            font-weight: 300;
+        }
+        .card::before {
+            top: 18px;
+            left: 24px;
+        }
+        .card::after {
+            bottom: 18px;
+            right: 24px;
+        }
+
+        /* ─── Аватар / Иконка ─── */
+        .avatar {
+            width: 110px;
+            height: 110px;
+            margin: -70px auto 16px;
+            background: linear-gradient(135deg, #f8c8d0, #f0a0b0);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 56px;
+            box-shadow: 0 12px 40px rgba(220, 80, 110, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.7);
+            animation: pulseGlow 2.6s ease-in-out infinite;
+            position: relative;
+        }
+
+        .avatar::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 150, 170, 0.25);
+            animation: ringPulse 2.6s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 12px 40px rgba(220, 80, 110, 0.4);
+            }
+            50% {
+                box-shadow: 0 12px 60px rgba(220, 80, 110, 0.7);
+            }
+        }
+
+        @keyframes ringPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.12);
+                opacity: 0;
+            }
+        }
+
+        /* ─── Текст ─── */
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d1418;
+            margin: 8px 0 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .title span {
+            background: linear-gradient(135deg, #d45a6e, #b83a50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #6e4a50;
+            font-weight: 400;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .subtitle .heart-emoji {
+            display: inline-block;
+            animation: heartbeat 1.4s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            14% {
+                transform: scale(1.25);
+            }
+            28% {
+                transform: scale(1);
+            }
+            42% {
+                transform: scale(1.25);
+            }
+            56% {
+                transform: scale(1);
+            }
+        }
+
+        .message {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #3d2a2e;
+            margin: 20px 0 28px;
+            padding: 0 4px;
+            font-weight: 400;
+            background: rgba(255, 220, 220, 0.2);
+            border-radius: 20px;
+            padding: 18px 20px;
+            border-left: 4px solid #e0697a;
+            border-right: 4px solid #e0697a;
+        }
+
+        .message .name-highlight {
+            color: #b83a50;
+            font-weight: 600;
+            font-size: 19px;
+        }
+
+        /* ─── Детали свидания ─── */
+        .details {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            margin: 16px 0 28px;
+            font-size: 15px;
+            color: #4d2e34;
+        }
+
+        .details-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 230, 230, 0.5);
+            padding: 6px 16px 6px 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(224, 105, 122, 0.2);
+        }
+
+        .details-item .icon {
+            font-size: 20px;
+        }
+
+        /* ─── Кнопки ─── */
+        .actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn {
+            padding: 16px 44px;
+            border: none;
+            border-radius: 60px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #f05a6e, #d43a52);
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(212, 58, 82, 0.45);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 14px 40px rgba(212, 58, 82, 0.6);
+        }
+
+        .btn-yes:active {
+            transform: scale(0.96);
+        }
+
+        .btn-no {
+            background: #e8e0de;
+            color: #4d2e34;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.15s ease;
+            position: relative;
+        }
+
+        .btn-no:hover {
+            background: #ddd4d2;
+            transform: scale(0.96);
+        }
+
+        /* ─── "Нет" убегает ─── */
+        .btn-no.runaway {
+            transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 5;
+        }
+
+        /* ─── Конфетти-контейнер ─── */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+            animation: confettiFall 3.2s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(0deg) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) rotate(720deg) scale(1.2);
+            }
+        }
+
+        /* ─── Модальное окно "Да" ─── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal {
+            max-width: 480px;
+            width: 100%;
+            background: linear-gradient(145deg, #fff8f5, #ffece8);
+            border-radius: 48px;
+            padding: 40px 32px 44px;
+            text-align: center;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 200, 200, 0.3);
+            position: relative;
+            animation: modalPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.7) rotate(-4deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .modal .big-heart {
+            font-size: 72px;
+            display: block;
+            margin-bottom: 8px;
+            animation: heartbeat 1.2s ease-in-out infinite;
+        }
+
+        .modal h2 {
+            font-size: 32px;
+            color: #2d1418;
+            margin: 8px 0 12px;
+        }
+
+        .modal h2 span {
+            color: #d43a52;
+        }
+
+        .modal p {
+            font-size: 18px;
+            color: #4d2e34;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal .btn-close-modal {
+            background: linear-gradient(135deg, #f05a6e, #d43a52);
+            color: #fff;
+            border: none;
+            padding: 14px 44px;
+            border-radius: 60px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            box-shadow: 0 8px 28px rgba(212, 58, 82, 0.4);
+        }
+
+        .modal .btn-close-modal:hover {
+            transform: scale(1.05);
+        }
+
+        /* ─── Адаптивность ─── */
+        @media (max-width: 500px) {
+            .card {
+                padding: 32px 18px 36px;
+                border-radius: 32px;
+            }
+            .title {
+                font-size: 26px;
+            }
+            .message {
+                font-size: 15px;
+                padding: 14px 16px;
+            }
+            .btn {
+                padding: 14px 28px;
+                font-size: 18px;
+                min-width: 120px;
+            }
+            .actions {
+                gap: 16px;
+            }
+            .avatar {
+                width: 90px;
+                height: 90px;
+                font-size: 44px;
+                margin-top: -56px;
+            }
+            .details {
+                font-size: 13px;
+                gap: 10px 16px;
+            }
+            .modal {
+                padding: 30px 20px 34px;
+            }
+            .modal h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .btn {
+                padding: 12px 20px;
+                font-size: 16px;
+                min-width: 90px;
+            }
+            .title {
+                font-size: 22px;
+            }
+        }
+
+        /* ─── Стиль для цветов (декор) ─── */
+        .flower-decor {
+            font-size: 18px;
+            opacity: 0.5;
+            margin: 0 4px;
+            display: inline-block;
+        }
+
+        /* ─── Доп. анимация для звёздочек ─── */
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(0.8) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(20deg);
+            }
+        }
+
+        /* ─── Специальный текст с именем ─── */
+        .sarochaname {
+            display: inline-block;
+            background: linear-gradient(135deg, #d45a6e, #b83a50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Фоновые сердца ─── -->
+    <div class="bg-hearts" id="bgHearts"></div>
+
+    <!-- ─── Конфетти ─── -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- ─── ОСНОВНАЯ КАРТОЧКА ─── -->
+    <div class="card" id="inviteCard">
+
+        <!-- Аватар -->
+        <div class="avatar">🌸</div>
+
+        <!-- Заголовок -->
+        <h1 class="title">
+            <span>Сарочка</span> ❤️
+        </h1>
+        <p class="subtitle">
+            <span class="heart-emoji">💖</span> Ты — моя радость <span class="heart-emoji">💖</span>
+        </p>
+
+        <!-- Текст приглашения -->
+        <div class="message">
+            <span class="flower-decor">🌷</span>
+            Я приглашаю тебя на самое чудесное свидание!
+            <span class="flower-decor">🌷</span><br />
+            <span style="font-size:15px; color:#6e4a50;">
+                <span class="sarochaname">Сарочка</span>, ты сделаешь меня счастливым,
+                если скажешь <strong style="color:#d43a52;">ДА</strong> ✨
+            </span>
+        </div>
+
+        <!-- Детали -->
+        <div class="details">
+            <span class="details-item">
+                <span class="icon">📅</span> Суббота, 9 августа
+            </span>
+            <span class="details-item">
+                <span class="icon">⏰</span> 18:00
+            </span>
+            <span class="details-item">
+                <span class="icon">📍</span> Твоё любимое место
+            </span>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="actions">
+            <button class="btn btn-yes" id="btnYes">💕 Да!</button>
+            <button class="btn btn-no" id="btnNo">😅 Нет</button>
+        </div>
+
+        <p style="margin-top:20px; font-size:13px; color:#a07a80; letter-spacing:0.3px;">
+            <span class="sparkle">✨</span> нажми на сердечко <span class="sparkle">✨</span>
+        </p>
+    </div>
+
+    <!-- ─── МОДАЛКА "ДА" ─── -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <span class="big-heart">💗</span>
+            <h2>Ура! <span>Сарочка</span> сказала <span>ДА</span>! 🥳</h2>
+            <p>
+                Ты — самая прекрасная девушка на свете!<br />
+                Я безумно рад, что ты согласилась.<br />
+                🌹 <strong>Ты — моё счастье!</strong> 🌹
+            </p>
+            <button class="btn-close-modal" id="closeModal">💖 Обнимаю!</button>
+        </div>
+    </div>
+
+    <script>
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 1. Фоновые сердца
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        (function createBgHearts() {
+            const container = document.getElementById('bgHearts');
+            const count = 22;
+            const symbols = ['♥', '♥', '♥', '♡', '❤', '❥', '♥'];
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.className = 'bg-heart';
+                el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                const size = 18 + Math.random() * 32;
+                el.style.fontSize = size + 'px';
+                el.style.left = Math.random() * 100 + '%';
+                el.style.animationDuration = (14 + Math.random() * 16) + 's';
+                el.style.animationDelay = (Math.random() * 20) + 's';
+                el.style.opacity = 0.08 + Math.random() * 0.18;
+                container.appendChild(el);
+            }
+        })();
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 2. Убегающая кнопка "Нет"
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const btnNo = document.getElementById('btnNo');
+        const card = document.getElementById('inviteCard');
+        let noClicks = 0;
+
+        function moveNoButton() {
+            const cardRect = card.getBoundingClientRect();
+            const btnRect = btnNo.getBoundingClientRect();
+
+            // Границы внутри карточки (с отступом)
+            const pad = 20;
+            const maxX = cardRect.width - btnRect.width - pad;
+            const maxY = cardRect.height - btnRect.height - pad;
+
+            // Случайная позиция относительно карточки
+            const x = pad + Math.random() * maxX;
+            const y = pad + Math.random() * maxY;
+
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+            btnNo.classList.add('runaway');
+
+            // Анимируем текст
+            const texts = ['😅 Нет', '🤭 Нет', '🙈 Нет', '😘 Нет', '💕 Да?', '❤️ Да!'];
+            noClicks = (noClicks + 1) % texts.length;
+            btnNo.textContent = texts[noClicks];
+
+            // Если нажали много раз — меняем цвет
+            if (noClicks > 3) {
+                btnNo.style.background = 'linear-gradient(135deg, #f05a6e, #d43a52)';
+                btnNo.style.color = '#fff';
+                btnNo.style.boxShadow = '0 8px 30px rgba(212,58,82,0.4)';
+            }
+
+            // Вибрация (если поддерживается)
+            if (navigator.vibrate) navigator.vibrate(10);
+        }
+
+        btnNo.addEventListener('click', function(e) {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // При наведении — тоже убегаем (чтобы было сложнее поймать)
+        btnNo.addEventListener('mouseenter', function() {
+            if (Math.random() < 0.6) {
+                moveNoButton();
+            }
+        });
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 3. Кнопка "Да" → конфетти + модалка
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const btnYes = document.getElementById('btnYes');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModalBtn = document.getElementById('closeModal');
+        const confettiContainer = document.getElementById('confettiContainer');
+
+        function fireConfetti(count = 180) {
+            const colors = ['#f05a6e', '#f8c8d0', '#ffb3c6', '#d43a52', '#ff8da1', '#ffd1dc', '#ff6b81', '#f7a1b5'];
+            const container = confettiContainer;
+
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = 6 + Math.random() * 14;
+                const isCircle = Math.random() > 0.5;
+                piece.style.width = isCircle ? size + 'px' : size * 0.6 + 'px';
+                piece.style.height = isCircle ? size + 'px' : size * 1.8 + 'px';
+                piece.style.borderRadius = isCircle ? '50%' : '4px';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.top = '-10px';
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                piece.style.animationDuration = (2.2 + Math.random() * 2.2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.8) + 's';
+                piece.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                container.appendChild(piece);
+
+                // Удаляем после анимации
+                setTimeout(() => {
+                    if (piece.parentNode) piece.remove();
+                }, 4500);
+            }
+        }
+
+        btnYes.addEventListener('click', function() {
+            // Конфетти
+            fireConfetti(220);
+            // Доп. волна через 0.5с
+            setTimeout(() => fireConfetti(80), 400);
+
+            // Показываем модалку
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Убираем кнопку "Нет" с экрана (чтобы не мешала)
+            btnNo.style.display = 'none';
+        });
+
+        // Закрыть модалку
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            // Показываем кнопку "Нет" обратно (но она может быть спрятана)
+            btnNo.style.display = 'inline-flex';
+            // Сброс позиции "Нет"
+            btnNo.style.position = 'relative';
+            btnNo.style.left = 'auto';
+            btnNo.style.top = 'auto';
+            btnNo.classList.remove('runaway');
+            btnNo.textContent = '😅 Нет';
+            btnNo.style.background = '#e8e0de';
+            btnNo.style.color = '#4d2e34';
+            btnNo.style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)';
+            noClicks = 0;
+            // Ещё один залп конфетти для радости
+            setTimeout(() => fireConfetti(60), 300);
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 4. Доп. эффект: при нажатии на карточку — маленькие сердца
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        card.addEventListener('dblclick', function(e) {
+            const x = e.clientX - card.getBoundingClientRect().left;
+            const y = e.clientY - card.getBoundingClientRect().top;
+            const heart = document.createElement('div');
+            heart.textContent = '💖';
+            heart.style.position = 'absolute';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.fontSize = '32px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '10';
+            heart.style.transform = 'translate(-50%, -50%) scale(0)';
+            heart.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            heart.style.opacity = '1';
+            card.appendChild(heart);
+
+            requestAnimationFrame(() => {
+                heart.style.transform = 'translate(-50%, -50%) scale(1.6)';
+                heart.style.opacity = '0';
+            });
+
+            setTimeout(() => {
+                if (heart.parentNode) heart.remove();
+            }, 1000);
+        });
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 5. Маленький сюрприз: при загрузке — несколько сердечек
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.textContent = ['💕', '💗', '💖', '🌸', '🌺', '✨'][Math.floor(Math.random() * 6)];
+                        heart.style.position = 'fixed';
+                        heart.style.left = (10 + Math.random() * 80) + '%';
+                        heart.style.top = (10 + Math.random() * 80) + '%';
+                        heart.style.fontSize = (28 + Math.random() * 40) + 'px';
+                        heart.style.pointerEvents = 'none';
+                        heart.style.zIndex = '999';
+                        heart.style.transform = 'scale(0) rotate(20deg)';
+                        heart.style.transition = 'all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                        heart.style.opacity = '0.8';
+                        document.body.appendChild(heart);
+
+                        requestAnimationFrame(() => {
+                            heart.style.transform = 'scale(1.4) rotate(0deg)';
+                            heart.style.opacity = '0';
+                        });
+
+                        setTimeout(() => {
+                            if (heart.parentNode) heart.remove();
+                        }, 1200);
+                    }, i * 150);
+                }
+            }, 400);
+        });
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 6. Защита от случайного закрытия вкладки
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // (ничего, просто напоминание)
+        console.log('❤️ Сарочка, ты — самая лучшая! ❤️');
+    </script>
+
+</body>
+</html>
