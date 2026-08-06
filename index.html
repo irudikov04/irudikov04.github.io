@@ -24,7 +24,7 @@
             position: relative;
         }
 
-        /* ─── Фоновые сердца (партиклы) ─── */
+        /* ─── Фоновые сердца ─── */
         .bg-hearts {
             position: fixed;
             top: 0;
@@ -84,7 +84,6 @@
             transform: scale(1.01);
         }
 
-        /* ─── Декоративные уголки ─── */
         .card::before,
         .card::after {
             content: '✦';
@@ -103,7 +102,6 @@
             right: 24px;
         }
 
-        /* ─── Аватар / Иконка ─── */
         .avatar {
             width: 110px;
             height: 110px;
@@ -151,7 +149,6 @@
             }
         }
 
-        /* ─── Текст ─── */
         .title {
             font-size: 32px;
             font-weight: 700;
@@ -219,7 +216,6 @@
             font-size: 19px;
         }
 
-        /* ─── Детали свидания ─── */
         .details {
             display: flex;
             justify-content: center;
@@ -244,7 +240,6 @@
             font-size: 20px;
         }
 
-        /* ─── Кнопки ─── */
         .actions {
             display: flex;
             justify-content: center;
@@ -300,14 +295,13 @@
             transform: scale(0.96);
         }
 
-        /* ─── "Нет" убегает ─── */
         .btn-no.runaway {
             transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             z-index: 5;
         }
 
-        /* ─── Конфетти-контейнер ─── */
+        /* ─── Конфетти ─── */
         .confetti-container {
             position: fixed;
             top: 0;
@@ -338,7 +332,7 @@
             }
         }
 
-        /* ─── Модальное окно "Да" ─── */
+        /* ─── Модальное окно (универсальное) ─── */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -368,16 +362,18 @@
         }
 
         .modal {
-            max-width: 480px;
+            max-width: 520px;
             width: 100%;
             background: linear-gradient(145deg, #fff8f5, #ffece8);
             border-radius: 48px;
-            padding: 40px 32px 44px;
+            padding: 32px 28px 38px;
             text-align: center;
             box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 200, 200, 0.3);
             position: relative;
             animation: modalPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes modalPop {
@@ -392,16 +388,16 @@
         }
 
         .modal .big-heart {
-            font-size: 72px;
+            font-size: 60px;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             animation: heartbeat 1.2s ease-in-out infinite;
         }
 
         .modal h2 {
-            font-size: 32px;
+            font-size: 28px;
             color: #2d1418;
-            margin: 8px 0 12px;
+            margin: 4px 0 12px;
         }
 
         .modal h2 span {
@@ -409,13 +405,59 @@
         }
 
         .modal p {
-            font-size: 18px;
+            font-size: 17px;
             color: #4d2e34;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
-        .modal .btn-close-modal {
+        /* ─── Сетка выбора места ─── */
+        .choice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 16px 0 20px;
+        }
+
+        .choice-item {
+            background: #fff8f5;
+            border: 2px solid #f0d0d0;
+            border-radius: 24px;
+            padding: 16px 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #3d2a2e;
+        }
+
+        .choice-item .emoji {
+            font-size: 36px;
+        }
+
+        .choice-item:hover {
+            border-color: #d43a52;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 58, 82, 0.2);
+            background: #fff0ed;
+        }
+
+        .choice-item:active {
+            transform: scale(0.96);
+        }
+
+        .choice-item.selected {
+            border-color: #d43a52;
+            background: #fce4e0;
+            box-shadow: 0 0 0 4px rgba(212, 58, 82, 0.2);
+        }
+
+        .btn-close-modal {
             background: linear-gradient(135deg, #f05a6e, #d43a52);
             color: #fff;
             border: none;
@@ -426,13 +468,35 @@
             cursor: pointer;
             transition: transform 0.2s ease;
             box-shadow: 0 8px 28px rgba(212, 58, 82, 0.4);
+            margin-top: 8px;
         }
 
-        .modal .btn-close-modal:hover {
+        .btn-close-modal:hover {
             transform: scale(1.05);
         }
 
-        /* ─── Адаптивность ─── */
+        .btn-close-modal:active {
+            transform: scale(0.96);
+        }
+
+        .final-message .big-heart {
+            font-size: 72px;
+        }
+
+        .final-message h2 {
+            font-size: 30px;
+        }
+
+        .final-message .highlight-place {
+            color: #d43a52;
+            font-weight: 700;
+            background: rgba(212, 58, 82, 0.12);
+            padding: 2px 12px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        /* ─── Адаптив ─── */
         @media (max-width: 500px) {
             .card {
                 padding: 32px 18px 36px;
@@ -464,10 +528,22 @@
                 gap: 10px 16px;
             }
             .modal {
-                padding: 30px 20px 34px;
+                padding: 24px 16px 28px;
+                border-radius: 32px;
             }
             .modal h2 {
-                font-size: 26px;
+                font-size: 22px;
+            }
+            .choice-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .choice-item {
+                padding: 12px 6px;
+                font-size: 14px;
+            }
+            .choice-item .emoji {
+                font-size: 28px;
             }
         }
 
@@ -480,9 +556,11 @@
             .title {
                 font-size: 22px;
             }
+            .choice-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        /* ─── Стиль для цветов (декор) ─── */
         .flower-decor {
             font-size: 18px;
             opacity: 0.5;
@@ -490,7 +568,6 @@
             display: inline-block;
         }
 
-        /* ─── Доп. анимация для звёздочек ─── */
         .sparkle {
             display: inline-block;
             animation: sparkle 2s ease-in-out infinite;
@@ -508,7 +585,6 @@
             }
         }
 
-        /* ─── Специальный текст с именем ─── */
         .sarochaname {
             display: inline-block;
             background: linear-gradient(135deg, #d45a6e, #b83a50);
@@ -530,10 +606,8 @@
     <!-- ─── ОСНОВНАЯ КАРТОЧКА ─── -->
     <div class="card" id="inviteCard">
 
-        <!-- Аватар -->
         <div class="avatar">🌸</div>
 
-        <!-- Заголовок -->
         <h1 class="title">
             <span>Сарочка</span> ❤️
         </h1>
@@ -541,7 +615,6 @@
             <span class="heart-emoji">💖</span> Ты — моя радость <span class="heart-emoji">💖</span>
         </p>
 
-        <!-- Текст приглашения -->
         <div class="message">
             <span class="flower-decor">🌷</span>
             Я приглашаю тебя на самое чудесное свидание!
@@ -552,7 +625,6 @@
             </span>
         </div>
 
-        <!-- Детали -->
         <div class="details">
             <span class="details-item">
                 <span class="icon">📅</span> Суббота, 9 августа
@@ -565,7 +637,6 @@
             </span>
         </div>
 
-        <!-- Кнопки -->
         <div class="actions">
             <button class="btn btn-yes" id="btnYes">💕 Да!</button>
             <button class="btn btn-no" id="btnNo">😅 Нет</button>
@@ -576,17 +647,10 @@
         </p>
     </div>
 
-    <!-- ─── МОДАЛКА "ДА" ─── -->
+    <!-- ─── МОДАЛКА (динамическая) ─── -->
     <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <span class="big-heart">💗</span>
-            <h2>Ура! <span>Сарочка</span> сказала <span>ДА</span>! 🥳</h2>
-            <p>
-                Ты — самая прекрасная девушка на свете!<br />
-                Я безумно рад, что ты согласилась.<br />
-                🌹 <strong>Ты — моё счастье!</strong> 🌹
-            </p>
-            <button class="btn-close-modal" id="closeModal">💖 Обнимаю!</button>
+        <div class="modal" id="modalContent">
+            <!-- Сюда будет вставлен контент через JS -->
         </div>
     </div>
 
@@ -622,34 +686,23 @@
         function moveNoButton() {
             const cardRect = card.getBoundingClientRect();
             const btnRect = btnNo.getBoundingClientRect();
-
-            // Границы внутри карточки (с отступом)
             const pad = 20;
             const maxX = cardRect.width - btnRect.width - pad;
             const maxY = cardRect.height - btnRect.height - pad;
-
-            // Случайная позиция относительно карточки
             const x = pad + Math.random() * maxX;
             const y = pad + Math.random() * maxY;
-
             btnNo.style.position = 'absolute';
             btnNo.style.left = x + 'px';
             btnNo.style.top = y + 'px';
             btnNo.classList.add('runaway');
-
-            // Анимируем текст
             const texts = ['😅 Нет', '🤭 Нет', '🙈 Нет', '😘 Нет', '💕 Да?', '❤️ Да!'];
             noClicks = (noClicks + 1) % texts.length;
             btnNo.textContent = texts[noClicks];
-
-            // Если нажали много раз — меняем цвет
             if (noClicks > 3) {
                 btnNo.style.background = 'linear-gradient(135deg, #f05a6e, #d43a52)';
                 btnNo.style.color = '#fff';
                 btnNo.style.boxShadow = '0 8px 30px rgba(212,58,82,0.4)';
             }
-
-            // Вибрация (если поддерживается)
             if (navigator.vibrate) navigator.vibrate(10);
         }
 
@@ -658,7 +711,6 @@
             moveNoButton();
         });
 
-        // При наведении — тоже убегаем (чтобы было сложнее поймать)
         btnNo.addEventListener('mouseenter', function() {
             if (Math.random() < 0.6) {
                 moveNoButton();
@@ -666,17 +718,13 @@
         });
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // 3. Кнопка "Да" → конфетти + модалка
+        // 3. Конфетти
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        const btnYes = document.getElementById('btnYes');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const closeModalBtn = document.getElementById('closeModal');
         const confettiContainer = document.getElementById('confettiContainer');
 
         function fireConfetti(count = 180) {
             const colors = ['#f05a6e', '#f8c8d0', '#ffb3c6', '#d43a52', '#ff8da1', '#ffd1dc', '#ff6b81', '#f7a1b5'];
             const container = confettiContainer;
-
             for (let i = 0; i < count; i++) {
                 const piece = document.createElement('div');
                 piece.className = 'confetti-piece';
@@ -693,35 +741,88 @@
                 piece.style.animationDelay = (Math.random() * 0.8) + 's';
                 piece.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
                 container.appendChild(piece);
-
-                // Удаляем после анимации
                 setTimeout(() => {
                     if (piece.parentNode) piece.remove();
                 }, 4500);
             }
         }
 
-        btnYes.addEventListener('click', function() {
-            // Конфетти
-            fireConfetti(220);
-            // Доп. волна через 0.5с
-            setTimeout(() => fireConfetti(80), 400);
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 4. Модалка с выбором места
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
 
-            // Показываем модалку
+        // Варианты мест
+        const places = [
+            { emoji: '🌳', name: 'Лемана ПРО' },
+            { emoji: '🌅', name: 'Пикник на пирсе' },
+            { emoji: '🔥', name: 'Шашлыки' },
+            { emoji: '🌸', name: 'Прогулка в парке' }
+        ];
+
+        function showChoiceModal() {
+            // Строим HTML с выбором
+            let choicesHTML = places.map((place, index) => `
+                <div class="choice-item" data-index="${index}">
+                    <span class="emoji">${place.emoji}</span>
+                    <span>${place.name}</span>
+                </div>
+            `).join('');
+
+            modalContent.innerHTML = `
+                <span class="big-heart">💗</span>
+                <h2>Сарочка, куда пойдём? 💕</h2>
+                <p>Выбери место для нашего свидания:</p>
+                <div class="choice-grid">
+                    ${choicesHTML}
+                </div>
+                <p style="font-size:14px; color:#a07a80; margin-top:4px;">нажми на вариант, чтобы выбрать</p>
+            `;
+
+            // Вешаем обработчики на каждый вариант
+            document.querySelectorAll('.choice-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const chosen = places[index];
+                    showFinalModal(chosen);
+                });
+            });
+
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-
-            // Убираем кнопку "Нет" с экрана (чтобы не мешала)
             btnNo.style.display = 'none';
-        });
+        }
 
-        // Закрыть модалку
+        function showFinalModal(chosen) {
+            // Финальное поздравление с выбранным местом
+            modalContent.innerHTML = `
+                <div class="final-message">
+                    <span class="big-heart">🥳</span>
+                    <h2>Ура! <span>Сарочка</span> выбрала <span class="highlight-place">${chosen.emoji} ${chosen.name}</span>!</h2>
+                    <p style="font-size:18px; margin:12px 0 16px;">
+                        ❤️ Ты — самая лучшая! Я так рад, что мы идём <br><strong>${chosen.emoji} ${chosen.name}</strong>.<br>
+                        Это будет незабываемо!
+                    </p>
+                    <button class="btn-close-modal" id="closeModal">💖 Обнимаю!</button>
+                </div>
+            `;
+
+            // Закрытие по кнопке
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            // Закрытие по клику на фон
+            modalOverlay.addEventListener('click', function onOverlayClick(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                    modalOverlay.removeEventListener('click', onOverlayClick);
+                }
+            });
+        }
+
         function closeModal() {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
-            // Показываем кнопку "Нет" обратно (но она может быть спрятана)
             btnNo.style.display = 'inline-flex';
-            // Сброс позиции "Нет"
             btnNo.style.position = 'relative';
             btnNo.style.left = 'auto';
             btnNo.style.top = 'auto';
@@ -731,17 +832,23 @@
             btnNo.style.color = '#4d2e34';
             btnNo.style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)';
             noClicks = 0;
-            // Ещё один залп конфетти для радости
-            setTimeout(() => fireConfetti(60), 300);
+            // Сброс модального содержимого (чтобы при повторном открытии было чисто)
+            // но оно перезапишется при следующем вызове showChoiceModal
         }
 
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', function(e) {
-            if (e.target === modalOverlay) closeModal();
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // 5. Кнопка "Да" → конфетти + модалка выбора
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const btnYes = document.getElementById('btnYes');
+
+        btnYes.addEventListener('click', function() {
+            fireConfetti(220);
+            setTimeout(() => fireConfetti(80), 400);
+            showChoiceModal();
         });
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // 4. Доп. эффект: при нажатии на карточку — маленькие сердца
+        // 6. Двойной клик по карточке — сердечки
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         card.addEventListener('dblclick', function(e) {
             const x = e.clientX - card.getBoundingClientRect().left;
@@ -758,19 +865,17 @@
             heart.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
             heart.style.opacity = '1';
             card.appendChild(heart);
-
             requestAnimationFrame(() => {
                 heart.style.transform = 'translate(-50%, -50%) scale(1.6)';
                 heart.style.opacity = '0';
             });
-
             setTimeout(() => {
                 if (heart.parentNode) heart.remove();
             }, 1000);
         });
 
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // 5. Маленький сюрприз: при загрузке — несколько сердечек
+        // 7. Приветственные сердечки при загрузке
         // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         window.addEventListener('load', function() {
             setTimeout(() => {
@@ -788,12 +893,10 @@
                         heart.style.transition = 'all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1)';
                         heart.style.opacity = '0.8';
                         document.body.appendChild(heart);
-
                         requestAnimationFrame(() => {
                             heart.style.transform = 'scale(1.4) rotate(0deg)';
                             heart.style.opacity = '0';
                         });
-
                         setTimeout(() => {
                             if (heart.parentNode) heart.remove();
                         }, 1200);
@@ -802,12 +905,7 @@
             }, 400);
         });
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // 6. Защита от случайного закрытия вкладки
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // (ничего, просто напоминание)
         console.log('❤️ Сарочка, ты — самая лучшая! ❤️');
     </script>
-
 </body>
 </html>
